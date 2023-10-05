@@ -1,0 +1,30 @@
+{
+  "name": "frontend-mobile",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@expo/metro-config": "*",
+    "@nx/expo": "*",
+    "@react-navigation/bottom-tabs": "^6.5.9",
+    "@react-navigation/native": "^6.1.8",
+    "@react-navigation/stack": "^6.3.18",
+    "@testing-library/jest-native": "*",
+    "@testing-library/react-native": "*",
+    "expo": "*",
+    "metro-config": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-gesture-handler": "^2.13.1",
+    "react-native-paper": "^5.10.6",
+    "react-native-reanimated": "^3.5.4",
+    "react-native-screens": "^3.25.0",
+    "react-native-svg": "*",
+    "react-native-svg-transformer": "*",
+    "react-native-web": "*",
+    "@expo/vector-icons": "*"
+  },
+  "scripts": {
+    "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/frontend-mobile && cp package-lock.json apps/frontend-mobile",
+    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/frontend-mobile"
+  }
+}
