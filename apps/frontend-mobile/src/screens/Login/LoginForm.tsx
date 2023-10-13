@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ButtonComponent, TextInputComponent } from 'components/ui';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from 'hooks';
+import Toast from 'react-native-toast-message';
 
 const LoginForm = () => {
-  const { signIn } = useAuth();
+  const { signIn, errorMsg } = useAuth();
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +16,18 @@ const LoginForm = () => {
   const handleSubmit = async () => signIn(email, password);
   const navigateToRegister = () => navigation.navigate('Register');
   const navigateToForgotPassword = () => navigation.navigate('ForgotPassword');
+
+  const showToast = (errorMsg: string) => {
+    Toast.show({
+      type: 'error',
+      text1: 'Oops!',
+      text2: errorMsg,
+    });
+  };
+
+  useMemo(() => {
+    if (errorMsg) showToast(errorMsg);
+  }, [errorMsg]);
 
   return (
     <View style={styles.container}>

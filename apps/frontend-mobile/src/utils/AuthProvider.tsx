@@ -1,5 +1,6 @@
 import { AuthContextData, AuthData } from 'models/auth';
 import React, { createContext, useState } from 'react';
+import apiUser from 'services/api/user';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -12,31 +13,66 @@ export const AuthContext = createContext<AuthContextData>(
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData>();
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const callToast = (msg: string) => {
+    setLoading(false);
+    setErrorMsg(msg);
+    setTimeout(() => {
+      setErrorMsg('');
+    }, 3000);
+  };
 
   const signIn = async (email: string, password: string) => {
     setLoading(true);
-    console.log('Email:', email);
-    console.log('Password:', password);
+    if (!email || !password) {
+      callToast('correo y contraseña son requeridos');
+      return;
+    }
+
+    const data = await apiUser.getSingle(email);
+
+    if (!data || data.password !== password) {
+      callToast('contraseña o correo incorrecto');
+      return;
+    }
 
     const _authData: AuthData = {
-      token: '123456',
-      email: email,
-      username: email?.split('@')[0],
+      token: data?.id || '123',
+      email: data.email,
+      username: data.username,
     };
-
     setLoading(false);
     setAuthData(_authData);
   };
 
   const signUp = async (email: string, username: string, password: string) => {
     setLoading(true);
-    const _authData: AuthData = {
-      token: '123456',
-      email: email,
-      username: username,
-    };
+
+    if (!email || !password || !username) {
+      callToast('coreo, contraseña y nombre de usuario son requeridos');
+      return;
+    }
+    const data = await apiUser.getSingle(email);
+    if (data) {
+      setLoading(false);
+      callToast('este correo ya esta registrado');
+      return;
+    }
+
+    await apiUser
+      .post({ email, username, password })
+      .then((res) => {
+        const _authData: AuthData = {
+          token: res?.id || '',
+          email: res.email,
+          username: res.username,
+        };
+        setAuthData(_authData);
+      })
+      .catch((err) => console.log(err));
+
     setLoading(false);
-    setAuthData(_authData);
   };
 
   const signOut = async () => {
@@ -47,7 +83,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ authData, loading, signIn, signUp, signOut }}
+      value={{ authData, loading, errorMsg, signIn, signUp, signOut }}
     >
       {children}
     </AuthContext.Provider>

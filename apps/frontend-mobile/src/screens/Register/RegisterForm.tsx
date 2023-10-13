@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth } from 'hooks';
 
 const RegisterForm = () => {
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const RegisterForm = () => {
     setPasswordConfirmation(text);
   const navigateToLogin = () => navigation.navigate('Login');
 
-  const handleSubmit = async () => signIn(email, password);
+  const handleSubmit = async () => signUp(email, username, password);
 
   return (
     <View style={styles.container}>

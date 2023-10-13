@@ -4,27 +4,32 @@
   "private": true,
   "dependencies": {
     "@expo/metro-config": "*",
+    "@expo/vector-icons": "*",
     "@nx/expo": "*",
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/stack": "^6.3.18",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
+    "axios": "^1.5.1",
     "expo": "*",
     "metro-config": "*",
     "react": "*",
     "react-native": "*",
+    "react-native-axios": "^0.17.1",
     "react-native-gesture-handler": "^2.13.1",
     "react-native-paper": "^5.10.6",
     "react-native-reanimated": "^3.5.4",
     "react-native-screens": "^3.25.0",
     "react-native-svg": "*",
     "react-native-svg-transformer": "*",
-    "react-native-web": "*",
-    "@expo/vector-icons": "*"
+    "react-native-web": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/frontend-mobile && cp package-lock.json apps/frontend-mobile",
     "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/frontend-mobile"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.72.3"
   }
 }
