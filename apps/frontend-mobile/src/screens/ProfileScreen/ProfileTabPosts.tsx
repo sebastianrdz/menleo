@@ -1,29 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { HeaderComponent, PostComponent } from 'components';
-import { useAuth } from 'hooks';
-import { SafeAreaView } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { PostComponent } from 'components';
+import { FlatList } from 'react-native';
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
-  const { authData } = useAuth();
-
-  const headerActions = [
-    {
-      onPress: () => navigation.navigate('Post'),
-      icon: <Ionicons name="add-outline" size={24} color="black" />,
-    },
-    {
-      onPress: () => navigation.navigate('Notifications'),
-      icon: <Ionicons name="notifications-outline" size={24} color="black" />,
-    },
-    {
-      onPress: () => navigation.navigate('Messages'),
-      icon: <Ionicons name="mail-outline" size={24} color="black" />,
-    },
-  ];
-
+const ProfileTabPosts = () => {
   const posts = [
     {
       id: '1',
@@ -108,27 +86,19 @@ const HomeScreen = () => {
       timestamp: '2d',
     },
   ];
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <HeaderComponent
-        title={authData?.username ? authData.username : 'Home'}
-        subtitle={'Bienvenido de regreso'}
-        actions={headerActions}
-      />
-      <FlatList
-        data={posts}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <PostComponent
-            author={item.author}
-            content={item.content}
-            timestamp={item.timestamp}
-          />
-        )}
-      />
-    </SafeAreaView>
+    <FlatList
+      data={posts}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <PostComponent
+          author={item.author}
+          content={item.content}
+          timestamp={item.timestamp}
+        />
+      )}
+    />
   );
 };
 
-export default HomeScreen;
+export default ProfileTabPosts;

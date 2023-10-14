@@ -23,7 +23,8 @@
     "react-native-screens": "^3.25.0",
     "react-native-svg": "*",
     "react-native-svg-transformer": "*",
-    "react-native-web": "*"
+    "react-native-web": "*",
+    "react-native-toast-message": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/frontend-mobile && cp package-lock.json apps/frontend-mobile",

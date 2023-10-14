@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return;
     }
 
-    const data = await apiUser.getSingle(email);
+    const data = await apiUser.getSingle(email.toLocaleLowerCase());
 
     if (!data || data.password !== password) {
       callToast('contraseña o correo incorrecto');
