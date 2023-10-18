@@ -1,5 +1,5 @@
 import { ApiCore } from './utils/core';
-import { IUser, IUserFilter } from 'services/models/user';
+import { IUser } from 'services/models/user';
 
 const url = 'user';
 

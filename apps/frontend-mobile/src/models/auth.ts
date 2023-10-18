@@ -8,6 +8,7 @@ export type AuthContextData = {
 };
 
 export type AuthData = {
+  user_id: string;
   token: string;
   email: string;
   username: string;

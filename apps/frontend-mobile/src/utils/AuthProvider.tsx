@@ -37,7 +37,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return;
     }
 
+    console.log(data);
+
     const _authData: AuthData = {
+      user_id: data?.id || '',
       token: data?.id || '123',
       email: data.email,
       username: data.username,
@@ -64,6 +67,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       .post({ email, username, password })
       .then((res) => {
         const _authData: AuthData = {
+          user_id: res?.id || '',
           token: res?.id || '',
           email: res.email,
           username: res.username,

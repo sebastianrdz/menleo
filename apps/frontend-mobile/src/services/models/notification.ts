@@ -1,4 +1,4 @@
-export interface IUser {
+export interface INotification {
   id?: string;
   email: string;
   username: string;

@@ -1,32 +1,48 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 interface NotificationRowComponentProps {
-  profilePicture?: string;
-  title: string;
-  description: string;
-  iconName: string | any;
+  id: string;
+  type: string;
+  content: string;
+  user_id: string;
+  timestamp: string;
 }
 
 const NotificationRowComponent = ({
-  profilePicture,
-  title,
-  description,
-  iconName,
+  id,
+  type,
+  content,
+  user_id,
+  timestamp,
 }: NotificationRowComponentProps) => {
+  const iconName = () => {
+    switch (type) {
+      case 'like':
+        return 'ios-heart-outline';
+      case 'comment':
+        return 'ios-chatbubbles-outline';
+      case 'follow':
+        return 'ios-person-add-outline';
+      default:
+        return 'ios-heart-outline';
+    }
+  };
+
   return (
     <View style={styles.container}>
-      {profilePicture ? (
-        <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
-      ) : (
-        <View style={styles.profilePicture} />
-      )}
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+      <View style={styles.profilePicture}>
+        <Ionicons
+          name={iconName()}
+          size={24}
+          color="black"
+          style={styles.icon}
+        />
       </View>
-      <Ionicons name={iconName} size={24} color="black" style={styles.icon} />
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>{type.toLocaleUpperCase()}</Text>
+        <Text style={styles.description}>{content}</Text>
+      </View>
     </View>
   );
 };
@@ -45,6 +61,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textContainer: {
     flex: 1,
