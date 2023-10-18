@@ -1,6 +1,7 @@
 export interface INotification {
   id?: string;
-  email: string;
-  username: string;
-  password: string;
+  type: string;
+  content: string;
+  user_id: string;
+  timw: string;
 }

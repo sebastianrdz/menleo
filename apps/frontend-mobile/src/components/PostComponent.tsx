@@ -9,7 +9,7 @@ interface PostComponentProps {
   onLike?: () => void;
   onComment?: () => void;
   onShare?: () => void;
-  onMenu?: () => void; // Callback for the menu button
+  onMenu?: () => void;
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
@@ -24,7 +24,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.author}>{author}</Text>
+        <Text style={styles.author}>@{author}</Text>
 
         <TouchableOpacity onPress={onMenu}>
           <Ionicons

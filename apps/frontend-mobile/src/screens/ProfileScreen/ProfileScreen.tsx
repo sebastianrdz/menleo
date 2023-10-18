@@ -13,8 +13,10 @@ import {
 import ProfileTabPosts from './ProfileTabPosts';
 import ProfileTabPrograms from './ProfileTabPrograms';
 import ProfileTabWorkouts from './ProfileTabWorkouts';
+import { useAuth } from 'hooks';
 
 const ProfileScreen = () => {
+  const { authData } = useAuth();
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('posts'); // Initialize with the first tab
 
@@ -49,8 +51,8 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <HeaderComponent
-        title={'JOHN DOE'}
-        subtitle={'@johndoe123'}
+        title={'Perfil'}
+        subtitle={'Domingo 16, Agosto'}
         actions={headerActions}
       />
       <ProfileHeader
