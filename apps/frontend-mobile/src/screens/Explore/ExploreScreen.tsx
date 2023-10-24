@@ -1,7 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import { HeaderComponent } from 'components';
-import { WorkInProgressContainer } from 'containers';
 import { useState } from 'react';
 import {
   SafeAreaView,
@@ -11,14 +8,13 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import TabHeaderActions from 'utils/tabHeaderActions';
 
 const Tab1 = () => <Text>Tab 1 Content</Text>;
 const Tab2 = () => <Text>Tab 2 Content</Text>;
 const Tab3 = () => <Text>Tab 3 Content</Text>;
 
 const ExploreScreen = () => {
-  const navigation = useNavigation();
-
   const [activeTab, setActiveTab] = useState('tab1'); // Initialize with the first tab
 
   const renderTabContent = () => {
@@ -34,23 +30,12 @@ const ExploreScreen = () => {
     }
   };
 
-  const headerActions = [
-    {
-      onPress: () => navigation.navigate('Create'),
-      icon: <Ionicons name="add-outline" size={24} color="black" />,
-    },
-    {
-      onPress: () => navigation.navigate('Search'),
-      icon: <Ionicons name="search-outline" size={24} color="black" />,
-    },
-  ];
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <HeaderComponent
         title={'EXPLORAR'}
         subtitle={'Domingo 16, Agosto'}
-        actions={headerActions}
+        actions={TabHeaderActions('Explore')}
       />
       <View>
         <ScrollView

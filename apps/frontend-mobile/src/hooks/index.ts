@@ -1,1 +1,2 @@
-export { default as useAuth } from './useAuth';
+export { default as useAuth } from 'hooks/useAuth';
+export { default as useFetch } from 'hooks/useFetch';

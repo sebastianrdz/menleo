@@ -1,5 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import { HeaderComponent, ProfileHeader } from 'components';
 import { useState } from 'react';
 import {
@@ -14,26 +12,11 @@ import ProfileTabPosts from './ProfileTabPosts';
 import ProfileTabPrograms from './ProfileTabPrograms';
 import ProfileTabWorkouts from './ProfileTabWorkouts';
 import { useAuth } from 'hooks';
+import TabHeaderActions from 'utils/TabHeaderActions';
 
 const ProfileScreen = () => {
   const { authData } = useAuth();
-  const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('posts'); // Initialize with the first tab
-
-  const headerActions = [
-    // {
-    //   onPress: () => navigation.navigate(''),
-    //   icon: <Ionicons name="create-outline" size={24} color="black" />,
-    // },
-    // {
-    //   onPress: () => navigation.navigate(''),
-    //   icon: <Ionicons name="share-outline" size={24} color="black" />,
-    // },
-    {
-      onPress: () => navigation.navigate('Settings'),
-      icon: <Ionicons name="settings-outline" size={24} color="black" />,
-    },
-  ];
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -51,9 +34,9 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <HeaderComponent
-        title={'Perfil'}
+        title={'PERFIL'}
         subtitle={'Domingo 16, Agosto'}
-        actions={headerActions}
+        actions={TabHeaderActions('Profile')}
       />
       <ProfileHeader
         username={`@${authData?.username}` || '@user127492'}

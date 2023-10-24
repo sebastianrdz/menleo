@@ -2,8 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { HeaderComponent, Loading } from 'components';
 import { useAuth } from 'hooks';
-import useFetch from 'hooks/useFetch';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TextInput,
   TouchableOpacity,
@@ -18,7 +17,6 @@ const CreatePostScreen = () => {
   const navigation = useNavigation();
   const [postContent, setPostContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleAddImage = () => {
     // Implement logic to add images to the post

@@ -1,7 +1,7 @@
 export interface INotification {
-  id?: string;
+  _id?: string;
   type: string;
   content: string;
   user_id: string;
-  timw: string;
+  timestamp: string;
 }

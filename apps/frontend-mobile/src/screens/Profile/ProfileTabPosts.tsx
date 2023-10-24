@@ -4,11 +4,12 @@ import useFetch from 'hooks/useFetch';
 import { useState, useCallback } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import apiPost from 'services/api/post';
+import { IPost } from 'services/models/post';
 
 const ProfileTabPosts = () => {
   const { authData } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
-  const { isLoading, data, refetch } = useFetch({
+  const { isLoading, data, refetch } = useFetch<IPost[]>({
     callback: () => apiPost.getSingle(authData?.username || ''),
   });
 
@@ -16,7 +17,7 @@ const ProfileTabPosts = () => {
     setRefreshing(true);
     refetch();
     setRefreshing(false);
-  }, []);
+  }, [refetch]);
 
   if (isLoading) {
     <Loading isVisible={isLoading} />;
@@ -24,18 +25,12 @@ const ProfileTabPosts = () => {
 
   return (
     <FlatList
-      data={(data as any)?.slice().reverse()}
-      keyExtractor={(item) => item._id}
+      data={data?.slice().reverse()}
+      keyExtractor={(item) => item._id || ''}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-      renderItem={({ item }) => (
-        <PostComponent
-          author={item.author_username}
-          content={item.content}
-          timestamp={item.timestamp}
-        />
-      )}
+      renderItem={({ item }) => <PostComponent {...item} />}
     />
   );
 };

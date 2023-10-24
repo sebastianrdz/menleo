@@ -1,19 +1,15 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 interface NotificationRowComponentProps {
-  id: string;
   type: string;
   content: string;
-  user_id: string;
   timestamp: string;
 }
 
 const NotificationRowComponent = ({
-  id,
   type,
   content,
-  user_id,
   timestamp,
 }: NotificationRowComponentProps) => {
   const iconName = () => {
@@ -42,6 +38,7 @@ const NotificationRowComponent = ({
       <View style={styles.textContainer}>
         <Text style={styles.title}>{type.toLocaleUpperCase()}</Text>
         <Text style={styles.description}>{content}</Text>
+        <Text style={styles.description}>{timestamp.split('-')[0]}</Text>
       </View>
     </View>
   );

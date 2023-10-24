@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 interface PostComponentProps {
-  author: string;
+  author_username: string;
   content: string;
   timestamp: string;
   onLike?: () => void;
@@ -13,7 +13,7 @@ interface PostComponentProps {
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
-  author,
+  author_username,
   content,
   timestamp,
   onLike,
@@ -24,7 +24,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.author}>@{author}</Text>
+        <Text style={styles.author}>@{author_username}</Text>
 
         <TouchableOpacity onPress={onMenu}>
           <Ionicons

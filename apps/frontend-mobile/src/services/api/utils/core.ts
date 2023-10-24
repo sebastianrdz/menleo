@@ -11,7 +11,7 @@ interface ApiOptions<Model> {
 }
 
 export class ApiCore<Model> {
-  constructor(private options: ApiOptions<Model>) {}
+  constructor(public options: ApiOptions<Model>) {}
 
   getAll(): Promise<Model[]> {
     if (this.options.getAll) {
@@ -20,7 +20,7 @@ export class ApiCore<Model> {
     throw new Error('Method not allowed');
   }
 
-  getSingle(id: string): Promise<Model> {
+  getSingle(id: string): Promise<Model[]> {
     if (this.options.getSingle) {
       return apiProvider.getSingle(this.options.url, id);
     }

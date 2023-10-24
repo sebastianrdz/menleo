@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Alert } from 'react-native';
 
-interface UseFetchProps {
-  callback: () => Promise<any>;
+interface UseFetchProps<Model> {
+  callback: () => Promise<Model>;
 }
 
-const useFetch = ({ callback }: UseFetchProps) => {
-  const [data, setData] = useState(null);
+function useFetch<Model>({ callback }: UseFetchProps<Model>) {
+  const [data, setData] = useState<Model>();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string>('');
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -36,6 +35,6 @@ const useFetch = ({ callback }: UseFetchProps) => {
   };
 
   return { data, isLoading, error, refetch };
-};
+}
 
 export default useFetch;

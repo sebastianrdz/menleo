@@ -3,9 +3,8 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import { HeaderComponent } from 'components';
+import { HeaderComponent, Loading } from 'components';
 import { useAuth } from 'hooks';
-import { AuthData } from 'models/auth';
 import React, { useState } from 'react';
 import {
   View,
@@ -16,14 +15,28 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
-import { IMessage } from 'screens/Messages/MessagesScreen';
+import apiChat from 'services/api/chat';
+import { IMessage } from 'services/models/chat';
 
 const ChatScreen = () => {
   const { params } = useRoute<any>();
   const { authData } = useAuth();
   const navigation = useNavigation();
+
   const [messages, setMessages] = useState<IMessage[]>(params?.messages || []);
   const [newMessage, setNewMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleSubmitMessage = async () => {
+    setIsLoading(true);
+    const body: IMessage = {
+      text: newMessage,
+      username: authData?.username || '',
+      timestamp: 'now',
+    };
+    await apiChat.patchMessages(params._id, body);
+    setIsLoading(false);
+  };
 
   const handleSend = () => {
     if (newMessage.trim() === '') return;
@@ -35,6 +48,7 @@ const ChatScreen = () => {
         timestamp: 'now',
       },
     ];
+    handleSubmitMessage();
     setMessages(updatedMessages);
     setNewMessage('');
   };
@@ -42,6 +56,10 @@ const ChatScreen = () => {
   const participantUsername = params?.usernames.filter(
     (username: string) => username !== authData?.username
   )[0];
+
+  if (isLoading) {
+    <Loading isVisible={isLoading} />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
