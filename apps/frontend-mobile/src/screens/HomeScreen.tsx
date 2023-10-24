@@ -15,7 +15,7 @@ const HomeScreen = () => {
 
   const headerActions = [
     {
-      onPress: () => navigation.navigate('Post'),
+      onPress: () => navigation.navigate('CreatePost'),
       icon: <Ionicons name="add-outline" size={24} color="black" />,
     },
     {

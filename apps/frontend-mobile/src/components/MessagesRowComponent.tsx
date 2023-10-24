@@ -1,36 +1,46 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from 'hooks';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { IMessage } from 'screens/Messages/MessagesScreen';
 
 interface MessagesRowComponentProps {
   profilePicture?: string;
-  name: string;
-  message: string;
-  time: string;
+  usernames: string[];
+  messages: IMessage[];
   badgeCount?: number;
   onPress: () => void;
 }
 
 const MessagesRowComponent = ({
   profilePicture,
-  name,
-  message,
-  time,
+  usernames,
+  messages,
   badgeCount,
   onPress,
 }: MessagesRowComponentProps) => {
+  const { authData } = useAuth();
+  const participantUsername = usernames.filter(
+    (username: string) => username !== authData?.username
+  )[0];
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       {profilePicture ? (
         <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
       ) : (
-        <View style={styles.profilePicture} />
+        <Ionicons
+          name="person-circle-outline"
+          style={styles.profilePicture}
+          size={50}
+          color="gray"
+        />
       )}
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{name}</Text>
-        <Text style={styles.description}>{message}</Text>
+        <Text style={styles.title}>{participantUsername}</Text>
+        <Text style={styles.description}>{messages.at(-1)?.text}</Text>
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.time}>{messages.at(-1)?.timestamp}</Text>
         {badgeCount && badgeCount > 0 && (
           <View style={styles.badge}>
             <Text style={styles.badgeText}>{badgeCount}</Text>

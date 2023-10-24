@@ -21,14 +21,14 @@ const ProfileScreen = () => {
   const [activeTab, setActiveTab] = useState('posts'); // Initialize with the first tab
 
   const headerActions = [
-    {
-      onPress: () => navigation.navigate(''),
-      icon: <Ionicons name="create-outline" size={24} color="black" />,
-    },
-    {
-      onPress: () => navigation.navigate(''),
-      icon: <Ionicons name="share-outline" size={24} color="black" />,
-    },
+    // {
+    //   onPress: () => navigation.navigate(''),
+    //   icon: <Ionicons name="create-outline" size={24} color="black" />,
+    // },
+    // {
+    //   onPress: () => navigation.navigate(''),
+    //   icon: <Ionicons name="share-outline" size={24} color="black" />,
+    // },
     {
       onPress: () => navigation.navigate('Settings'),
       icon: <Ionicons name="settings-outline" size={24} color="black" />,
@@ -56,7 +56,7 @@ const ProfileScreen = () => {
         actions={headerActions}
       />
       <ProfileHeader
-        username={'@johndoe123'}
+        username={`@${authData?.username}` || '@user127492'}
         bio={'Eat, gym, sleep, repeat...'}
         profilePicture={{ uri: 'https://picsum.photos/seed/6/80' }}
       />

@@ -28,7 +28,7 @@ const HeaderComponent = ({
       )}
       <View style={styles.titleContainer}>
         {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-        <Text style={styles.title}>{title.toLocaleUpperCase()}</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.actionsContainer}>
         {actions?.map((action, index) => (

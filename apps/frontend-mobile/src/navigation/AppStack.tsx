@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
+  ChatScreen,
+  CreatePostScreen,
   ExploreScreen,
   HomeScreen,
   MessagesScreen,
@@ -18,9 +20,10 @@ const AppStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Featured" component={FeaturedTabs} />
-      {/* <Stack.Screen name="Post" component={PostScreen} /> */}
+      <Stack.Screen name="CreatePost" component={CreatePostScreen} />
       <Stack.Screen name="Notifications" component={NotificationsScreen} />
       <Stack.Screen name="Messages" component={MessagesScreen} />
+      <Stack.Screen name="Chat" component={ChatScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
